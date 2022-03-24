@@ -1,6 +1,7 @@
 package es.fsg2.springboot.backend.apirest.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class RolService implements GenericServiceInterface<Rol, Integer>{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Rol findById(Integer id) {
-		return rolDao.findById(id).orElse(null);
+	public Optional<Rol> findById(Integer id) {
+		return rolDao.findById(id);
 	}
 
 	@Override

@@ -5,10 +5,12 @@ import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,14 +29,46 @@ public class Reserva  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "idreserva")
 	private Integer idreserva;
-	
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	private Time hora;
 	
-	//@ManyToOne(optional = false)
-	private Integer fkusuario;
+	@JoinColumn(name = "fkidservicio")
+	@ManyToOne
+	private Servicio servicio;
+	
+	@JoinColumn(name = "fkidusuario")
+	@ManyToOne
+	private Usuario usuario;
+	
+	
+	
+	public Reserva() {
+		super();
+	}
+	
+	
+
+	public Reserva(Integer idreserva, Date fecha, Time hora, Servicio servicio) {
+		super();
+		this.idreserva = idreserva;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.servicio = servicio;
+	}
+
+
+
+	public Reserva(Integer idreserva, Date fecha, Time hora, Servicio servicio, Usuario usuario) {
+		super();
+		this.idreserva = idreserva;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.servicio = servicio;
+		this.usuario = usuario;
+	}
 
 	public Integer getIdreserva() {
 		return idreserva;
@@ -60,17 +94,20 @@ public class Reserva  implements Serializable{
 		this.hora = hora;
 	}
 
-	public Integer getFkusuario() {
-		return fkusuario;
+	public Servicio getServicio() {
+		return servicio;
 	}
 
-	public void setFkusuario(Integer fkusuario) {
-		this.fkusuario = fkusuario;
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 
-	
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-	
-
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 }

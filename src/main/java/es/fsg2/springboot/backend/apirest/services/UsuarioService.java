@@ -27,8 +27,8 @@ public class UsuarioService implements GenericServiceInterface<Usuario, Integer>
 
 	@Override
 	@Transactional(readOnly = true)
-	public Usuario findById(Integer id) {
-		return usuarioDao.findById(id).orElse(null);
+	public Optional<Usuario> findById(Integer id) {
+		return usuarioDao.findById(id);
 	}
 
 	@Override

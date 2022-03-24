@@ -1,11 +1,16 @@
 package es.fsg2.springboot.backend.apirest.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,12 +24,27 @@ public class Review implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "idreview")
 	private Integer idreview;
 	
 	private Integer estrellas;
 	private String opiniones;
 	
-	private Integer fkusuario;
+	@JoinColumn(name = "fkidusuario")
+	@ManyToOne
+	private Usuario usuario;
+	
+	public Review() {
+		super();
+	}
+	
+	public Review(Integer idreview, Integer estrellas, String opiniones, Usuario usuario) {
+		super();
+		this.idreview = idreview;
+		this.estrellas = estrellas;
+		this.opiniones = opiniones;
+		this.usuario = usuario;
+	}
 
 	public Integer getIdreview() {
 		return idreview;
@@ -50,14 +70,15 @@ public class Review implements Serializable {
 		this.opiniones = opiniones;
 	}
 
-	public Integer getFkusuario() {
-		return fkusuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setFkusuario(Integer fkusuario) {
-		this.fkusuario = fkusuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-	
+
 	
 
+	
 }

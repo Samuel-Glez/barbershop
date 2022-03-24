@@ -1,6 +1,7 @@
 package es.fsg2.springboot.backend.apirest.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,15 @@ public class ReservaService implements GenericServiceInterface<Reserva, Integer>
 	}
 
 	@Override
+	public Optional<Reserva> findById(Integer id) {
+		return reservaDao.findById(id);
+	}
+	
+	/*@Override
 	@Transactional(readOnly = true)
 	public Reserva findById(Integer id) {
 		return reservaDao.findById(id).orElse(null);
-	}
+	}*/
 
 	@Override
 	public Reserva save(Reserva reserva) {
@@ -36,4 +42,6 @@ public class ReservaService implements GenericServiceInterface<Reserva, Integer>
 	public void delete(Integer id) {
 		reservaDao.deleteById(id);
 	}
+
+	
 }

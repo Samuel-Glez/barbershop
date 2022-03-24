@@ -1,6 +1,7 @@
 package es.fsg2.springboot.backend.apirest.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class ReviewService implements GenericServiceInterface<Review, Integer> {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Review findById(Integer id) {
-		return reviewDao.findById(id).orElse(null);
+	public Optional<Review> findById(Integer id) {
+		return reviewDao.findById(id);
 	}
 
 	@Override

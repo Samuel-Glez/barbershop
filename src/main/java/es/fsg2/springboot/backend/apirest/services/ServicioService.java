@@ -1,6 +1,7 @@
 package es.fsg2.springboot.backend.apirest.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class ServicioService implements GenericServiceInterface<Servicio, Intege
 	}
 
 	@Override
-	public Servicio findById(Integer id) {
-		return servicioDao.findById(id).orElse(null);
+	public Optional<Servicio> findById(Integer id) {
+		return servicioDao.findById(id);
 	}
 
 	@Override
