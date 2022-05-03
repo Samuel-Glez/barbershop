@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,7 @@ public class ReservaController {
 	@Autowired
 	private ServicioService servicioService;
 
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/reserva")
 	public List<Reserva> getList() {
 		List l = new ArrayList<ReservaDTO>();
@@ -47,6 +49,7 @@ public class ReservaController {
 		return l;
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/reserva/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getReservaById(@PathVariable("id") Integer id) {
@@ -54,18 +57,24 @@ public class ReservaController {
 		return ResponseEntity.ok(new ReservaDTO(optReserva.get()));
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PostMapping("/reserva")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> save(@RequestBody ReservaDTO reserva) {
 		Reserva reservaActual = new Reserva();
 		reservaActual.setFecha(reserva.getFecha());
 		reservaActual.setHora(reserva.getHora());
+		reservaActual.setOrdenhora(reserva.getOrdenhora());
+		reservaActual.setDuracion(reserva.getDuracion());
+		reservaActual.setStatus(reserva.getStatus());
 		Optional<Servicio> optServicio = servicioService.findById(reserva.getFkidservicio());
 		if (optServicio.isPresent()) {
 			reservaActual.setServicio(optServicio.get());
 			Optional<Usuario> optUsuario = usuarioService.findById(reserva.getFkidusuario());
-			if (optUsuario.isPresent()) {
+			Optional<Usuario> optPeluquero = usuarioService.findById(reserva.getFkidpeluquero());
+			if (optUsuario.isPresent() && optPeluquero.isPresent()) {
 				reservaActual.setUsuario(optUsuario.get());
+				reservaActual.setPeluquero(optPeluquero.get());
 				reservaService.save(reservaActual);
 				return ResponseEntity.ok().body(new ReservaDTO(reservaActual));
 			} else {
@@ -76,6 +85,7 @@ public class ReservaController {
 		}
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PutMapping("/reserva/{id}")
 	public ResponseEntity<?> update(@RequestBody ReservaDTO reserva, @PathVariable Integer id) {
 		Optional<Reserva> optReserva = reservaService.findById(id);
@@ -83,6 +93,8 @@ public class ReservaController {
 			Reserva reservaActual = optReserva.get();
 			reservaActual.setFecha(reserva.getFecha());
 			reservaActual.setHora(reserva.getHora());
+			reservaActual.setOrdenhora(reserva.getOrdenhora());
+			reservaActual.setStatus(reserva.getStatus());
 			Optional<Servicio> optServicio = servicioService.findById(reserva.getFkidservicio());
 			if (optServicio.isPresent()) {
 				reservaActual.setServicio(optServicio.get());
@@ -103,6 +115,7 @@ public class ReservaController {
 		}
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@DeleteMapping("/reserva/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		Optional<Reserva> optReserva = reservaService.findById(id);

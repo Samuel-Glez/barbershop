@@ -1,9 +1,6 @@
 package es.fsg2.springboot.backend.apirest.entity;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import es.fsg2.springboot.backend.apirest.entity.Usuario;
 
 @Entity
 @Table(name="reserva")
@@ -31,9 +26,11 @@ public class Reserva  implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "idreserva")
 	private Integer idreserva;
-	@Temporal(TemporalType.DATE)
-	private Date fecha;
-	private Time hora;
+	private String fecha;
+	private String hora;
+	private Integer duracion;
+	private Integer ordenhora;
+	private String status;
 	
 	@JoinColumn(name = "fkidservicio")
 	@ManyToOne
@@ -43,6 +40,10 @@ public class Reserva  implements Serializable{
 	@ManyToOne
 	private Usuario usuario;
 	
+	@JoinColumn(name = "fkidpeluquero")
+	@ManyToOne
+	private Usuario peluquero;
+	
 	
 	
 	public Reserva() {
@@ -51,23 +52,14 @@ public class Reserva  implements Serializable{
 	
 	
 
-	public Reserva(Integer idreserva, Date fecha, Time hora, Servicio servicio) {
+	public Reserva(Integer idreserva, String fecha, String hora, Integer duracion, Integer ordenhora, String status) {
 		super();
 		this.idreserva = idreserva;
 		this.fecha = fecha;
 		this.hora = hora;
-		this.servicio = servicio;
-	}
-
-
-
-	public Reserva(Integer idreserva, Date fecha, Time hora, Servicio servicio, Usuario usuario) {
-		super();
-		this.idreserva = idreserva;
-		this.fecha = fecha;
-		this.hora = hora;
-		this.servicio = servicio;
-		this.usuario = usuario;
+		this.duracion = duracion;
+		this.ordenhora = ordenhora;
+		this.status = status;
 	}
 
 	public Integer getIdreserva() {
@@ -78,19 +70,19 @@ public class Reserva  implements Serializable{
 		this.idreserva = idreserva;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
-	public Time getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Time hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 
@@ -109,5 +101,56 @@ public class Reserva  implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+
+
+	public Usuario getPeluquero() {
+		return peluquero;
+	}
+
+
+
+	public void setPeluquero(Usuario peluquero) {
+		this.peluquero = peluquero;
+	}
+
+	public Integer getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Integer duracion) {
+		this.duracion = duracion;
+	}
+
+
+
+	public Integer getOrdenhora() {
+		return ordenhora;
+	}
+
+
+
+	public void setOrdenhora(Integer ordenhora) {
+		this.ordenhora = ordenhora;
+	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

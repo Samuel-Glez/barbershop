@@ -30,6 +30,7 @@ public class UsuarioService implements GenericServiceInterface<Usuario, Integer>
 	public Optional<Usuario> findById(Integer id) {
 		return usuarioDao.findById(id);
 	}
+	
 
 	@Override
 	public Usuario save(Usuario usuario) {

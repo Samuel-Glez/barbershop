@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -48,11 +50,14 @@ public class Usuario implements Serializable {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Set<Reserva> reservas = new HashSet<>();
+	
+	@OneToMany(mappedBy = "peluquero", cascade = CascadeType.ALL)
+	private Set<Reserva> reservas2 = new HashSet<>();
 
 	public Usuario() {
 		super();
 	}
-
+	
 	public Usuario(String nombre, String apellidos, String email, Integer telefono, String password, Rol rol) {
 		super();
 		this.nombre = nombre;
@@ -137,4 +142,15 @@ public class Usuario implements Serializable {
 		this.reservas = reservas;
 	}
 
+	@JsonIgnore
+	public Set<Reserva> getReserva() {
+		return reservas2;
+	}
+
+
+	public void setReserva(Set<Reserva> reserva) {
+		this.reservas2 = reserva;
+	}
+
+	
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class RolController {
 	@Autowired
 	private RolService rolService;
 
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/rol")
 	public List<Rol> geList() {
 		List l = new ArrayList<RolDTO>();
@@ -37,6 +39,7 @@ public class RolController {
 		return l;
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/rol/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getRolById(@PathVariable("id") Integer id) {
@@ -44,6 +47,7 @@ public class RolController {
 		return ResponseEntity.ok(new RolDTO(optRol.get()));
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PostMapping("/rol")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> save(@RequestBody Rol rol) {
@@ -54,6 +58,7 @@ public class RolController {
 		return ResponseEntity.ok().body(new RolDTO(rolActual));
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PutMapping("/rol/{id}")
 	public ResponseEntity<?> update(@RequestBody RolDTO rol, @PathVariable Integer id) {
 		Optional<Rol> optRol = rolService.findById(id);
@@ -68,6 +73,7 @@ public class RolController {
 		}
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@DeleteMapping("/rol/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		Optional<Rol> optRol = rolService.findById(id);

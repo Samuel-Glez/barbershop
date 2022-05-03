@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,8 @@ public class UsuarioController {
 
 	@Autowired
 	private RolService rolService;
-
+	
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/usuarios")
 	public List<Usuario> geList() {
 		List l = new ArrayList<UsuarioDTO>();
@@ -41,14 +43,16 @@ public class UsuarioController {
 		}
 		return l;
 	}
-
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getUsuarioById(@PathVariable("id") Integer id) {
 		Optional<Usuario> optUsuario = usuarioService.findById(id);
 		return ResponseEntity.ok(new UsuarioDTO(optUsuario.get()));
 	}
-
+	
+	
+	@CrossOrigin("http://localhost:8100/")
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> save(@RequestBody UsuarioDTO usuario) {
@@ -67,7 +71,7 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El rol referenciado no existe");
 		}
 	}
-
+	@CrossOrigin("http://localhost:8100/")
 	@PutMapping("/usuarios/{id}")
 	public ResponseEntity<?> update(@RequestBody UsuarioDTO usuario, @PathVariable Integer id) {
 		Optional<Usuario> optUsuario = usuarioService.findById(id);
@@ -91,13 +95,13 @@ public class UsuarioController {
 		}
 
 	}
-
+	@CrossOrigin("http://localhost:8100/")
 	@DeleteMapping("/usuarios/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		Optional<Usuario> optUsuario = usuarioService.findById(id);
 		if (optUsuario.isPresent()) {
 			usuarioService.delete(id);
-			return ResponseEntity.ok("Usuario borrado");
+			return ResponseEntity.ok().body("Usuario borrado");
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el id del registro no existe");
 		}

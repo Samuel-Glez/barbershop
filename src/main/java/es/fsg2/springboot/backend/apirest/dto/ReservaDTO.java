@@ -10,10 +10,14 @@ public class ReservaDTO {
 	
 	private Integer idreserva;
 	
-	private Date fecha;
-	private Time hora;
+	private String fecha;
+	private String hora;
+	private Integer ordenhora;
+	private Integer duracion;
     private Integer fkidservicio;
 	private Integer fkidusuario;
+	private Integer fkidpeluquero;
+	private String status;
 
 	
 
@@ -25,17 +29,29 @@ public class ReservaDTO {
 		idreserva = reserva.getIdreserva();
 		fecha = reserva.getFecha();
 		hora = reserva.getHora();
+		ordenhora = reserva.getOrdenhora();
+		duracion = reserva.getDuracion();
 		fkidservicio = reserva.getServicio().getIdservicio();
 		fkidusuario = reserva.getUsuario().getIdusuario();
+		fkidpeluquero = reserva.getPeluquero().getIdusuario();
+		status = reserva.getStatus();
 	}
 	
-	public ReservaDTO(Integer idreserva, Date fecha, Time hora, Integer servicio, Integer usuario) {
+	
+	
+	
+	public ReservaDTO(Integer idreserva, String fecha, String hora, Integer ordenhora, Integer duracion,
+			Integer fkidservicio, Integer fkidusuario, Integer fkidpeluquero, String status) {
 		super();
 		this.idreserva = idreserva;
 		this.fecha = fecha;
 		this.hora = hora;
-		this.fkidservicio = servicio;
-		this.fkidusuario = usuario;
+		this.ordenhora = ordenhora;
+		this.duracion = duracion;
+		this.fkidservicio = fkidservicio;
+		this.fkidusuario = fkidusuario;
+		this.fkidpeluquero = fkidpeluquero;
+		this.status = status;
 	}
 
 	public Integer getIdreserva() {
@@ -48,23 +64,33 @@ public class ReservaDTO {
 	}
 
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
 
-	public Time getHora() {
+	public String getHora() {
 		return hora;
 	}
 
 
-	public void setHora(Time hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
+	}
+	
+	
+
+	public Integer getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Integer duracion) {
+		this.duracion = duracion;
 	}
 
 	public Integer getFkidservicio() {
@@ -83,8 +109,30 @@ public class ReservaDTO {
 		this.fkidusuario = fkidusuario;
 	}
 
+	public Integer getFkidpeluquero() {
+		return fkidpeluquero;
+	}
 
+	public void setFkidpeluquero(Integer fkidpeluquero) {
+		this.fkidpeluquero = fkidpeluquero;
+	}
 
+	public Integer getOrdenhora() {
+		return ordenhora;
+	}
+
+	public void setOrdenhora(Integer ordenhora) {
+		this.ordenhora = ordenhora;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 	
+
 }

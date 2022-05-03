@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class ReviewController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/review")
 	public List<Review> getList() {
 		List l = new ArrayList<ReviewDTO>();
@@ -41,7 +43,8 @@ public class ReviewController {
 		}
 		return l;
 	}
-
+	
+	@CrossOrigin("http://localhost:8100/")
 	@GetMapping("/review/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getReviewById(@PathVariable("id") Integer id) {
@@ -49,6 +52,7 @@ public class ReviewController {
 		return ResponseEntity.ok(new ReviewDTO(optReview.get()));
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PostMapping("/review")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> save(@RequestBody ReviewDTO review) {
@@ -65,6 +69,7 @@ public class ReviewController {
 		}
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@PutMapping("/review/{id}")
 	public ResponseEntity<?> update(@RequestBody ReviewDTO review, @PathVariable Integer id) {
 		Optional<Review> optReview = reviewService.findById(id);
@@ -84,6 +89,7 @@ public class ReviewController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el id del registro no existe");
 	}
 
+	@CrossOrigin("http://localhost:8100/")
 	@DeleteMapping("/review/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		Optional<Review> optReview = reviewService.findById(id);
