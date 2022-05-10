@@ -28,6 +28,7 @@ public class Reserva  implements Serializable{
 	private Integer idreserva;
 	private String fecha;
 	private String hora;
+	private String horacancelada;
 	private Integer duracion;
 	private Integer ordenhora;
 	private String status;
@@ -52,11 +53,13 @@ public class Reserva  implements Serializable{
 	
 	
 
-	public Reserva(Integer idreserva, String fecha, String hora, Integer duracion, Integer ordenhora, String status) {
+	public Reserva(Integer idreserva, String fecha, String hora, String horacancelada, Integer duracion,
+			Integer ordenhora, String status) {
 		super();
 		this.idreserva = idreserva;
 		this.fecha = fecha;
 		this.hora = hora;
+		this.horacancelada = horacancelada;
 		this.duracion = duracion;
 		this.ordenhora = ordenhora;
 		this.status = status;
@@ -144,6 +147,18 @@ public class Reserva  implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+
+	public String getHoracancelada() {
+		return horacancelada;
+	}
+
+
+
+	public void setHoracancelada(String horacancelada) {
+		this.horacancelada = horacancelada;
 	}
 	
 	

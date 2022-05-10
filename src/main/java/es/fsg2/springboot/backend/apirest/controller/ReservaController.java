@@ -64,6 +64,7 @@ public class ReservaController {
 		Reserva reservaActual = new Reserva();
 		reservaActual.setFecha(reserva.getFecha());
 		reservaActual.setHora(reserva.getHora());
+		reservaActual.setHoracancelada(reserva.getHoracancelada());
 		reservaActual.setOrdenhora(reserva.getOrdenhora());
 		reservaActual.setDuracion(reserva.getDuracion());
 		reservaActual.setStatus(reserva.getStatus());
@@ -93,6 +94,7 @@ public class ReservaController {
 			Reserva reservaActual = optReserva.get();
 			reservaActual.setFecha(reserva.getFecha());
 			reservaActual.setHora(reserva.getHora());
+			reservaActual.setHoracancelada(reserva.getHoracancelada());
 			reservaActual.setOrdenhora(reserva.getOrdenhora());
 			reservaActual.setStatus(reserva.getStatus());
 			Optional<Servicio> optServicio = servicioService.findById(reserva.getFkidservicio());

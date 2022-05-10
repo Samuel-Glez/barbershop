@@ -9,9 +9,9 @@ public class ReservaDTO {
 
 	
 	private Integer idreserva;
-	
 	private String fecha;
 	private String hora;
+	private String horacancelada;
 	private Integer ordenhora;
 	private Integer duracion;
     private Integer fkidservicio;
@@ -29,6 +29,7 @@ public class ReservaDTO {
 		idreserva = reserva.getIdreserva();
 		fecha = reserva.getFecha();
 		hora = reserva.getHora();
+		horacancelada = reserva.getHoracancelada();
 		ordenhora = reserva.getOrdenhora();
 		duracion = reserva.getDuracion();
 		fkidservicio = reserva.getServicio().getIdservicio();
@@ -37,15 +38,13 @@ public class ReservaDTO {
 		status = reserva.getStatus();
 	}
 	
-	
-	
-	
-	public ReservaDTO(Integer idreserva, String fecha, String hora, Integer ordenhora, Integer duracion,
-			Integer fkidservicio, Integer fkidusuario, Integer fkidpeluquero, String status) {
+	public ReservaDTO(Integer idreserva, String fecha, String hora, String horacancelada, Integer ordenhora,
+			Integer duracion, Integer fkidservicio, Integer fkidusuario, Integer fkidpeluquero, String status) {
 		super();
 		this.idreserva = idreserva;
 		this.fecha = fecha;
 		this.hora = hora;
+		this.horacancelada = horacancelada;
 		this.ordenhora = ordenhora;
 		this.duracion = duracion;
 		this.fkidservicio = fkidservicio;
@@ -82,8 +81,14 @@ public class ReservaDTO {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	
-	
+
+	public String getHoracancelada() {
+		return horacancelada;
+	}
+
+	public void setHoracancelada(String horacancelada) {
+		this.horacancelada = horacancelada;
+	}
 
 	public Integer getDuracion() {
 		return duracion;
